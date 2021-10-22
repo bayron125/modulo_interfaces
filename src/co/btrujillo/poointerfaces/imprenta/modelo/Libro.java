@@ -1,0 +1,36 @@
+package co.btrujillo.poointerfaces.imprenta.modelo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Libro implements Imprimible {
+    private List<Imprimible> paginas;
+    private String autor;
+    private String titulo;
+    private Genero genero;
+
+    public Libro(String autor, String titulo, Genero genero ){
+        paginas = new ArrayList<>();
+        this.autor = autor;
+        this.titulo = titulo;
+        this.genero = genero;
+    }
+
+    public Libro addPagina(Imprimible pagina){
+        paginas.add(pagina);
+        return this;
+    }
+
+
+    @Override
+    public String imprimir(){
+        StringBuilder sb = new StringBuilder("\nTitulo: ").append(this.titulo)
+                .append("\nGenero: ").append(genero)
+                .append("\nAutor: ").append(autor);
+        for (Imprimible pagina : paginas){
+            sb.append(pagina.imprimir()).append("\n");
+        }
+
+        return sb.toString();
+    }
+}
